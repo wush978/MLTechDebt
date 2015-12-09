@@ -170,7 +170,143 @@ small <- function(url) {
 
 --- &vcenter .largecontent
 
-## 可能的解決辦法：Random
+## 挑戰：機器學習系統的串接
 
+- 一個學習系統的輸入可能是另外一個系統的輸出
+- 沒有好好管理這樣關係，會發生系統相依性的失控
+    - 範例：sean 使用 shutong 的輸出，出事了
 
+--- &vcenter .largecontent
 
+## 可能的解決辦法：Automated Feature Management
+
+- [Ad Click Prediction: a View from the Trenches](https://www.eecs.tufts.edu/~dsculley/papers/ad-click-prediction.pdf)
+    - Chap 8
+
+```
+Signals consumed by new and active models
+are vetted by an automatic system of alerts.  Different learn-
+ing platforms share a common interface for reporting signal
+consumption  to  a  central  index.   When  a  signal  is  depre-
+cated (such as when a newer version is made available), we
+can  quickly  identify  all  consumers  of  the  signal  and  track
+replacement eforts. 
+```
+
+--- &vcenter .largecontent
+
+## 可能的解決辦法：Input Schema
+
+- 在 `.proto` 檔中規範註解的格式與說明
+- 撰寫工具爬`.proto`檔案產生資料的相依性報告（類似程式碼相依性的解決方案）
+- 整理jenkins 的task設定並自動產生工作的相依性
+
+--- &vcenter .largecontent
+
+## 挑戰：面向的失效與被取代
+
+- 學習的面向可能會失效或是被取代：
+    - 出現新版的面向
+    - 大環境的改變
+
+--- &vcenter .largecontent
+
+## 可能的解決方案：淘汰面向
+
+- 失效或被取代的面向應該要從模型中移除
+    - 準確性
+    - 穩定性
+- 我們應該要定時檢驗各種面向的有效性，並且移除無效的或幾乎無效的面向
+
+--- .dark .segue
+
+## 累積債務的症狀與原因
+
+--- &vcenter .largecontent
+
+## 症狀：大量轉換資料結構的程式碼（Glue Code）
+
+- D. Sculley 2014: 只有 5% 的程式碼在跑機器學習， 95% 的程式都是在整理資料
+- 實驗與實驗會越來越困難
+    - 慢
+    - Bug 多
+
+--- &vcenter .largecontent
+
+## 原因：不重工
+
+- 我們傾向於運用寫好的、汎用的機器學習模組（LiblineaR, libffm, ...）
+    - 為了要配合這些模組，我們要寫大量的程式碼來整理資料格式
+    - 程式語言不同，導致我們要作大量的系統整合的工作
+
+--- &vcenter .largecontent
+
+## 改良方案：自製機器學習模組
+
+- 汎用的機器學習模組，很難針對企業的特性做優化
+- 我們可以降低Glue Code， 針對線上系統的環境去重製機器學習演算法，降低系統整合的需求
+- 重工 vs 降低技術債
+
+--- &vcenter .largecontent
+
+## 症狀：錯綜複雜的資料相依性（Pipeline Jungle）
+
+- 準備資料的程式變得異常錯綜複雜
+- 錯誤會發生在任何一個環節，除錯和復原耗費大量的資源
+- 測試這些程式的正確性，需要大量的整合性測試
+
+--- &vcenter .largecontent
+
+## 改良方案：宏觀的系統設計（同時考量資料的收集與學習資料的抽取）
+
+- 這是一個純工程的問題
+- 良好的設計資料系統，可以降低維護的成本，並且加速學習系統的進步
+
+--- &vcenter .largecontent
+
+## 症狀：大量實驗用，並被廢棄的程式碼
+
+- 開發新功能時，要向下相容這些程式碼很困難
+- 有些程式碼暗中發揮功能，會讓複雜的機器學習系統更難控制
+    - Knight Capital's只是因為一個沒有預期發揮作用的程式碼，在45分鐘噴掉4.6億美元
+
+--- &vcenter .largecontent
+
+## 原因：在基礎不好的系統上快速進行實驗
+
+- 在Glue Code和Pipeline Jungle的環境下，要快速做實驗：
+    - 閃過系統的更動，拼命的接外掛
+    - 當實驗中止時，沒有妥善的清理外掛，或是直接產品化
+    - 被淘汰的產品，程式碼沒有清理
+- 在健康的機器學習系統，實驗用的環境應該是和產品的環境分割的
+
+--- &vcenter .largecontent
+
+## 解決方法：確實且定期的清理不用的程式
+
+- 善用Version Control 工具，如：Git
+- 通常大部分的程式碼都已經失效，應該被移除，維持程式碼的品質
+    - Git 會幫我們保存被移除的程式碼
+- 重新設計API ：一些常常要跑實驗的系統，可能需要為了實驗而重新設計
+    - D. Sculley: Google常常重新設計與重寫的系統，進而提昇做實驗的效率
+
+--- &vcenter .largecontent
+
+## 症狀：大量的設定（設定債）
+
+- 機器學習系統通常會保留很大的彈性做設定
+- 傳統的軟體工程思維，認為維持設定的正確性，是使用者的事情
+    - 機器學習系統很複雜，使用者越來越難保證設定的正確性
+
+--- &vcenter .largecontent
+
+## 解決方法：針對設定做驗證
+
+- Assertion
+- 將設定的更動視覺化
+    - Git
+- 對機器學習系統的設定當成程式碼一般的重視
+
+--- &vcenter .largecontent
+
+## Q&A

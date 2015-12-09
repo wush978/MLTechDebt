@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>機器學習的技術債</title>
+  <meta charset="utf-8">
+  <meta name="description" content="機器學習的技術債">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>機器學習的技術債</h1>
+    <h2>影響我們工作成效的重要因素</h2>
+    <p>Wush Wu<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>何謂技術債</li>
+<li>機器學習與技術債</li>
+<li>相依性債務
+
+<ul>
+<li>程式邏輯的相依性</li>
+<li>資料的相依性</li>
+</ul></li>
+<li>累積債務的症狀與原因</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>技術債</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Ward Cunningham (1992)</li>
+<li>技術債泛指「為了趕工、速度所寫出的不好的程式碼，或是不好的系統設計」</li>
+</ul>
+
+<p><center><img src="assets/img/tech_debt.jpg" style="max-height: 80%; max-width: 80%;"/></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>技術債</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>複製貼上程式碼 --&gt; 改程式碼要改多份 --&gt; 漏改導致重大錯誤</li>
+<li>將程式邏輯寫死</li>
+<li>在時程與技術債之間取得平衡，是工程師最重要的能力</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>現代工程師如何解決技術債</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>重構</li>
+<li>增加測試覆蓋率</li>
+<li>刪除不使用的程式碼</li>
+<li>降低系統間的相依性</li>
+<li>改良API 的設計</li>
+<li>改善文件</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>機器學習系統的範例：推薦系統</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>收集數據</li>
+<li>機器學習（鑑往知來）</li>
+<li>線上推薦</li>
+</ul>
+
+<p><center><img src="assets/img/2keL0FF.png" style="max-height: 100%; max-width: 100%;"/></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>機器學習系統與技術債</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>機器學習系統是用程式寫出來的：<strong>所有軟體工程上會遇到的問題，機器學習系統都會遇到</strong></li>
+<li>機器學習系統會被「資料」影響，因此<strong>機器學習系統不只透過程式碼，還透過資料去相依於外部系統</strong></li>
+<li>上述的<strong>現代軟體工程技術不足以解決機器學習系統的技術債</strong>(Sculley et al. 2014)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>相依性債務</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>解決程式碼相依性的技術：封裝與模組化</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>有兩份程式能讀取播放廣告的設定，有些程式用程式A ，有些用程式B
+
+<ul>
+<li>要改設定了，但是只有改A 忘記改B ==&gt; <img src="assets/img/bug.gif" style="max-height: 12%; max-width: 12%;"/></li>
+</ul></li>
+<li>封裝：限制所有其他人的程式，只能透過指定的方法來讀取播放廣告的設定
+
+<ul>
+<li>要改設定了，只要改一份程式 ==&gt; <img src="assets/img/coffee.gif" style="max-height: 20%; max-width: 20%;"/></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>相依性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>A 程式要正確，必須要依賴B 、C 、D ...</li>
+<li>A 相依於B 、C 、D ...</li>
+</ul>
+
+<p><center><img src="assets/img/bcd2a.png" style="max-height: 100%; max-width: 100%;"/></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>控制相依性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src="assets/img/nested.png" style="max-height: 100%; max-width: 100%;"/></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>控制相依性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src="assets/img/nested2.png" style="max-height: 100%; max-width: 100%;"/></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>控制程式的相依性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><code>public</code>/<code>protected</code>/<code>private</code></li>
+<li>IDE</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>資料的相依性與機器學習系統</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>挑戰：機器學習系統對輸入的學習面向很敏感</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>輸入的資料錯誤，學習的成果就會錯誤</li>
+<li>輸入的面向改變，學習的成果就會改變</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>投影（獨立）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src="assets/img/OLS-projection1.png" style="max-height: 100%; max-width: 100%;"/></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>投影（相關）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src="assets/img/OLS-projection2.png" style="max-height: 100%; max-width: 100%;"/></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>實務上的面向往往高度相關</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>單一面向對其他面向會有影響</li>
+<li>單一面向發生錯誤時，可能對模型的預測結果產生影響</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>可能的解決方法：Deep Insight</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src="assets/img/high-dim-vis.png" style="max-height: 100%; max-width: 100%;"/></center></p>
+
+<p><small><a href="http://research.google.com/pubs/pub41159.html">http://research.google.com/pubs/pub41159.html</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>挑戰：機器學習系統的輸出影響輸入</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>我們收集資料的方式可能和機器學習系統的輸出有關</li>
+<li>輸入的面向可能受到機器學習系統得輸出影響</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>挑戰：機器學習系統的串接</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>一個學習系統的輸入可能是另外一個系統的輸出</li>
+<li>沒有好好管理這樣關係，會發生系統相依性的失控
+
+<ul>
+<li>範例：sean 使用 shutong 的輸出，出事了</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>可能的解決辦法：Automated Feature Management</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><a href="https://www.eecs.tufts.edu/%7Edsculley/papers/ad-click-prediction.pdf">Ad Click Prediction: a View from the Trenches</a>
+
+<ul>
+<li>Chap 8</li>
+</ul></li>
+</ul>
+
+<pre><code>Signals consumed by new and active models
+are vetted by an automatic system of alerts.  Different learn-
+ing platforms share a common interface for reporting signal
+consumption  to  a  central  index.   When  a  signal  is  depre-
+cated (such as when a newer version is made available), we
+can  quickly  identify  all  consumers  of  the  signal  and  track
+replacement eforts. 
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>可能的解決辦法：Input Schema</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>在 <code>.proto</code> 檔中規範註解的格式與說明</li>
+<li>撰寫工具爬<code>.proto</code>檔案產生資料的相依性報告（類似程式碼相依性的解決方案）</li>
+<li>整理jenkins 的task設定並自動產生工作的相依性</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>挑戰：面向的失效與被取代</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>學習的面向可能會失效或是被取代：
+
+<ul>
+<li>出現新版的面向</li>
+<li>大環境的改變</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>可能的解決方案：淘汰面向</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>失效或被取代的面向應該要從模型中移除
+
+<ul>
+<li>準確性</li>
+<li>穩定性</li>
+</ul></li>
+<li>我們應該要定時檢驗各種面向的有效性，並且移除無效的或幾乎無效的面向</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>累積債務的症狀與原因</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>症狀：大量轉換資料結構的程式碼（Glue Code）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>D. Sculley 2014: 只有 5% 的程式碼在跑機器學習， 95% 的程式都是在整理資料</li>
+<li>實驗與實驗會越來越困難
+
+<ul>
+<li>慢</li>
+<li>Bug 多</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>原因：不重工</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>我們傾向於運用寫好的、汎用的機器學習模組（LiblineaR, libffm, ...）
+
+<ul>
+<li>為了要配合這些模組，我們要寫大量的程式碼來整理資料格式</li>
+<li>程式語言不同，導致我們要作大量的系統整合的工作</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>改良方案：自製機器學習模組</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>汎用的機器學習模組，很難針對企業的特性做優化</li>
+<li>我們可以降低Glue Code， 針對線上系統的環境去重製機器學習演算法，降低系統整合的需求</li>
+<li>重工 vs 降低技術債</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>症狀：錯綜複雜的資料相依性（Pipeline Jungle）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>準備資料的程式變得異常錯綜複雜</li>
+<li>錯誤會發生在任何一個環節，除錯和復原耗費大量的資源</li>
+<li>測試這些程式的正確性，需要大量的整合性測試</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>改良方案：宏觀的系統設計（同時考量資料的收集與學習資料的抽取）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>這是一個純工程的問題</li>
+<li>良好的設計資料系統，可以降低維護的成本，並且加速學習系統的進步</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>症狀：大量實驗用，並被廢棄的程式碼</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>開發新功能時，要向下相容這些程式碼很困難</li>
+<li>有些程式碼暗中發揮功能，會讓複雜的機器學習系統更難控制
+
+<ul>
+<li>Knight Capital&#39;s只是因為一個沒有預期發揮作用的程式碼，在45分鐘噴掉4.6億美元</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>原因：在基礎不好的系統上快速進行實驗</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>在Glue Code和Pipeline Jungle的環境下，要快速做實驗：
+
+<ul>
+<li>閃過系統的更動，拼命的接外掛</li>
+<li>當實驗中止時，沒有妥善的清理外掛，或是直接產品化</li>
+<li>被淘汰的產品，程式碼沒有清理</li>
+</ul></li>
+<li>在健康的機器學習系統，實驗用的環境應該是和產品的環境分割的</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>解決方法：確實且定期的清理不用的程式</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>善用Version Control 工具，如：Git</li>
+<li>通常大部分的程式碼都已經失效，應該被移除，維持程式碼的品質
+
+<ul>
+<li>Git 會幫我們保存被移除的程式碼</li>
+</ul></li>
+<li>重新設計API ：一些常常要跑實驗的系統，可能需要為了實驗而重新設計
+
+<ul>
+<li>D. Sculley: Google常常重新設計與重寫的系統，進而提昇做實驗的效率</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>症狀：大量的設定（設定債）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>機器學習系統通常會保留很大的彈性做設定</li>
+<li>傳統的軟體工程思維，認為維持設定的正確性，是使用者的事情
+
+<ul>
+<li>機器學習系統很複雜，使用者越來越難保證設定的正確性</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>解決方法：針對設定做驗證</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Assertion</li>
+<li>將設定的更動視覺化
+
+<ul>
+<li>Git</li>
+</ul></li>
+<li>對機器學習系統的設定當成程式碼一般的重視</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Q&amp;A</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='技術債'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='技術債'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='現代工程師如何解決技術債'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='機器學習系統的範例：推薦系統'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='機器學習系統與技術債'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='相依性債務'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='解決程式碼相依性的技術：封裝與模組化'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='相依性'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='控制相依性'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='控制相依性'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='控制程式的相依性'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='資料的相依性與機器學習系統'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='挑戰：機器學習系統對輸入的學習面向很敏感'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='投影（獨立）'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='投影（相關）'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='實務上的面向往往高度相關'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='可能的解決方法：Deep Insight'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='挑戰：機器學習系統的輸出影響輸入'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='挑戰：機器學習系統的串接'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='可能的解決辦法：Automated Feature Management'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='可能的解決辦法：Input Schema'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='挑戰：面向的失效與被取代'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='可能的解決方案：淘汰面向'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='累積債務的症狀與原因'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='症狀：大量轉換資料結構的程式碼（Glue Code）'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='原因：不重工'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='改良方案：自製機器學習模組'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='症狀：錯綜複雜的資料相依性（Pipeline Jungle）'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='改良方案：宏觀的系統設計（同時考量資料的收集與學習資料的抽取）'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='症狀：大量實驗用，並被廢棄的程式碼'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='原因：在基礎不好的系統上快速進行實驗'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='解決方法：確實且定期的清理不用的程式'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='症狀：大量的設定（設定債）'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='解決方法：針對設定做驗證'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='Q&amp;A'>
+         36
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

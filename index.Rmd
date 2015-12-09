@@ -309,4 +309,11 @@ replacement eforts.
 
 --- &vcenter .largecontent
 
+## Reference
+
+- [D. Sculley, et al. (2014) Machine Learning: The High Interest Credit Card of Technical Debt.](http://research.google.com/pubs/pub43146.html)
+- [H. Brendan McMahan et al. (2013) Ad Click Prediction: a View from the Trenches.](http://research.google.com/pubs/pub41159.html)
+
+--- &vcenter .largecontent
+
 ## Q&A

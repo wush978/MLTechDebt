@@ -1,0 +1,176 @@
+---
+title       : 機器學習的技術債
+subtitle    : 影響我們工作成效的重要因素
+author      : Wush Wu
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
+
+```{r setup, include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(knitr)
+  library(xtable)
+})
+opts_chunk$set(echo = FALSE, cache = FALSE)
+fig <- function(path, size = 100, style = NULL, center = TRUE) {
+  if (is.null(style)) retval <- sprintf('<img src="assets/img/%s" style="max-height: %d%%; max-width: %d%%;"/>', path, size, size)
+  else retval <- sprintf('<img src="assets/img/%s" style="%s"/>', path, style)
+  if (center) retval <- sprintf("<center>%s</center>", retval)
+  retval
+}
+small <- function(url) {
+  sprintf("<small><%s></small>", url)
+}
+```
+
+## 大綱
+
+- 何謂技術債
+- 機器學習與技術債
+- 相依性債務
+    - 程式邏輯的相依性
+    - 資料的相依性
+- 累積債務的症狀與原因
+
+--- &vcenter .largecontent
+
+## 技術債
+
+- Ward Cunningham (1992)
+- 技術債泛指「為了趕工、速度所寫出的不好的程式碼，或是不好的系統設計」
+
+`r fig("tech_debt.jpg", 80)`
+
+--- &vcenter .largecontent
+
+## 技術債
+
+- 複製貼上程式碼 --> 改程式碼要改多份 --> 漏改導致重大錯誤
+- 將程式邏輯寫死
+- 在時程與技術債之間取得平衡，是工程師最重要的能力
+
+--- &vcenter .largecontent
+
+## 現代工程師如何解決技術債
+
+- 重構
+- 增加測試覆蓋率
+- 刪除不使用的程式碼
+- 降低系統間的相依性
+- 改良API 的設計
+- 改善文件
+
+--- &vcenter .largecontent
+
+## 機器學習系統的範例：推薦系統
+
+- 收集數據
+- 機器學習（鑑往知來）
+- 線上推薦
+
+`r fig("2keL0FF.png")`
+
+--- &vcenter .largecontent
+
+## 機器學習系統與技術債
+
+- 機器學習系統是用程式寫出來的：**所有軟體工程上會遇到的問題，機器學習系統都會遇到**
+- 機器學習系統會被「資料」影響，因此**機器學習系統不只透過程式碼，還透過資料去相依於外部系統**
+- 上述的**現代軟體工程技術不足以解決機器學習系統的技術債**(Sculley et al. 2014)
+
+--- .dark .segue
+
+## 相依性債務
+
+--- &vcenter .largecontent
+
+## 解決程式碼相依性的技術：封裝與模組化
+
+- 有兩份程式能讀取播放廣告的設定，有些程式用程式A ，有些用程式B
+    - 要改設定了，但是只有改A 忘記改B ==> `r fig("bug.gif", 12, center = FALSE)`
+- 封裝：限制所有其他人的程式，只能透過指定的方法來讀取播放廣告的設定
+    - 要改設定了，只要改一份程式 ==> `r fig("coffee.gif", 20, center = FALSE)`
+
+--- &vcenter .largecontent
+
+## 相依性
+
+- A 程式要正確，必須要依賴B 、C 、D ...
+- A 相依於B 、C 、D ...
+
+`r fig("bcd2a.png")`
+
+--- &vcenter .largecontent
+
+## 控制相依性
+
+`r fig("nested.png")`
+
+--- &vcenter .largecontent
+
+## 控制相依性
+
+`r fig("nested2.png")`
+
+--- &vcenter .largecontent
+
+## 控制程式的相依性
+
+- `public`/`protected`/`private`
+- IDE
+
+--- .dark .segue
+
+## 資料的相依性與機器學習系統
+
+--- &vcenter .largecontent
+
+## 挑戰：機器學習系統對輸入的學習面向很敏感
+
+- 輸入的資料錯誤，學習的成果就會錯誤
+- 輸入的面向改變，學習的成果就會改變
+
+--- &vcenter .largecontent
+
+## 投影（獨立）
+
+`r fig("OLS-projection1.png")`
+
+--- &vcenter .largecontent
+
+## 投影（相關）
+
+`r fig("OLS-projection2.png")`
+
+--- &vcenter .largecontent
+
+## 實務上的面向往往高度相關
+
+- 單一面向對其他面向會有影響
+- 單一面向發生錯誤時，可能對模型的預測結果產生影響
+
+--- &vcenter .largecontent
+
+## 可能的解決方法：Deep Insight
+
+`r fig("high-dim-vis.png")`
+
+`r small("http://research.google.com/pubs/pub41159.html")`
+
+--- &vcenter .largecontent
+
+## 挑戰：機器學習系統的輸出影響輸入
+
+- 我們收集資料的方式可能和機器學習系統的輸出有關
+- 輸入的面向可能受到機器學習系統得輸出影響
+
+--- &vcenter .largecontent
+
+## 可能的解決辦法：Random
+
+
+
